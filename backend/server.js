@@ -1,11 +1,23 @@
 
-const express = require("express");
+/*
+    Import section
+*/
+import express from "express"
+import dotenv from "dotenv"
+
+import authRoutes from "./routes/authRoutes.js"
+
 
 const app = express();
+dotenv.config();
+
+const PORT = process.env.PORT || 5000
 
 app.get("/", (req, res) => {
-    // root route http://localhost:5000/
+    // root route http://localhost:${PORT}/
     res.send("Hello World");
 });
 
-app.listen(5000, () => console.log("Server running on port 5000"));
+app.use("/api/auth", authRoutes)
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}, http://localhost:${PORT}/"`));
