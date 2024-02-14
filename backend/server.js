@@ -1,23 +1,21 @@
 
-/*
-    Import section
-*/
-import express from "express"
-import dotenv from "dotenv"
+import express from "express";
+import dotenv from "dotenv";
 
-import authRoutes from "./routes/authRoutes.js"
-
+import authRoutes from "./routes/authRoutes.js";
+import connect from "./db/connectToMongoDb.js";
 
 const app = express();
+const PORT = process.env.PORT || 5000;
+
 dotenv.config();
 
-const PORT = process.env.PORT || 5000
+// middleware section
+app.use(express.json()); //parse incoming requests with JSON payloads(from req.body)
+app.use("/api/auth", authRoutes);
 
-app.get("/", (req, res) => {
-    // root route http://localhost:${PORT}/
-    res.send("Hello World");
+// start listening
+app.listen(PORT, () => {
+    connect();
+    console.log(`Server is running on port: ${PORT}`);
 });
-
-app.use("/api/auth", authRoutes)
-
-app.listen(PORT, () => console.log(`Server running on port ${PORT}, http://localhost:${PORT}/"`));
