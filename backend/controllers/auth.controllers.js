@@ -7,9 +7,10 @@ export const login = async (req, res) => {
         const { username, password } = req.body;
 
         const user = await User.findOne({ username });
-        const isPasswordCorrect = await bcrypt.compare(password, user?.password || "")
+        const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
         if (!user || !isPasswordCorrect) {
-            return res.status(400).json({error: "Username of Password is invalid"})
+            // check if user exists and whether passoword is correct
+            return res.status(400).json({ error: "Username of Password is invalid" });
         }
 
         generateTokenAndSetCookie(user._id, res);
@@ -27,7 +28,13 @@ export const login = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-    console.log("Logout User");
+    try {
+        res.cookie("jwt", "", { maxAge: 0 });
+        res.status(200).json({ message: "User logout succesfully" });
+    } catch (e) {
+        console.log(`Error in cotroller logout: ${e}`);
+        res.status(500).json({ error: `Error: ${e}` });
+    }
 };
 
 export const signin = async (req, res) => {
