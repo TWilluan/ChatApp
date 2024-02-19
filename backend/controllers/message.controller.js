@@ -1,4 +1,4 @@
-import Converstaion from "../models/convers.model.js";
+import Conversation from "../models/convers.model.js";
 import Message from "../models/message.model.js";
 
 export const send = async (req, res) => {
@@ -7,13 +7,13 @@ export const send = async (req, res) => {
         const { id: recieverId } = req.params;
         const senderId = req.user._id;
 
-        let conversation = await Converstaion.findOne({
+        let conversation = await Conversation.findOne({
             participants: { $all: [senderId, recieverId] },
         });
 
         if (!conversation) {
             // check if conversation is created of not
-            conversation = await Converstaion.create({
+            conversation = await Conversation.create({
                 participants: [senderId, recieverId],
             });
         }
@@ -26,13 +26,33 @@ export const send = async (req, res) => {
 
         if (newMessage) conversation.messages.push(newMessage._id);
 
-        //Save to mongoDB
-        await conversation.save();
-        await newMessage.save();
+        // Socketio -> make it realtime
+
+        // Save to mongoDB
+        await Promise.all([conversation.save(), newMessage.save()]);
 
         res.status(201).json({ newMessage });
     } catch (e) {
         console.log(`Error in message controller: ${e}`);
         res.status(500).json({ error: `Interal server error` });
+    }
+};
+
+export const get = async (req, res) => {
+    try {
+        const { id: recieverId } = req.params;
+        const senderId = req.user._id;
+
+        const conversation = await Conversation.findOne({
+            participants: { $all: [senderId, recieverId] },
+        }).populate("messages");
+
+        if (!conversation)
+            res.status(200).json([]);
+        res.status(200).json(conversation.messages);
+
+    } catch (e) {
+        console.log(`Error in message controller: ${e}`);
+        res.status(500).json({ error: "Internal server error" });
     }
 };
