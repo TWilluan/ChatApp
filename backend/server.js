@@ -4,6 +4,8 @@ import cookieParser from "cookie-parser";
 
 import authRoutes from "./routes/authRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+
 import connect from "./db/connectToMongoDb.js";
 
 const app = express();
@@ -18,6 +20,8 @@ app.use(cookieParser()); //parse cookie
 // routes
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
+app.use("/api/users", userRoutes);
+
 
 // start listening
 app.listen(PORT, () => {
