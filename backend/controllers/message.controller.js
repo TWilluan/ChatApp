@@ -4,19 +4,17 @@ import Message from "../models/message.model.js";
 export const send = async (req, res) => {
     try {
         const { message } = req.body;
-        const { id: recieverId } = req.params.id;
-
+        const { id: recieverId } = req.params;
         const senderId = req.user._id;
 
-        console.log(`senderId: ${senderId}`);
-
-        let conversation = await conversation.findOne({
+        let conversation = await Converstaion.findOne({
             participants: { $all: [senderId, recieverId] },
         });
 
         if (!conversation) {
+            // check if conversation is created of not
             conversation = await Converstaion.create({
-                participants: [sendderId, recieverId],
+                participants: [senderId, recieverId],
             });
         }
 
@@ -26,9 +24,11 @@ export const send = async (req, res) => {
             message,
         });
 
-        if (newMessage) {
-            conversation.messages.push(newMessage._id);
-        }
+        if (newMessage) conversation.messages.push(newMessage._id);
+
+        //Save to mongoDB
+        await conversation.save();
+        await newMessage.save();
 
         res.status(201).json({ newMessage });
     } catch (e) {
