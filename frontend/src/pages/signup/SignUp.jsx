@@ -13,7 +13,7 @@ const SignUp = () => {
                     <div>
                         <label className="label p-2">
                             <span className="text-base label-text">Full Name</span>
-                            <input type="text" placeholder="Full Name" className="w-full input input-bordered h-10"/>
+                            <input type="text" placeholder="Full Name" className="w-full input input-bordered h-10" />
                         </label>
 
                         <label className="label p-2">
@@ -26,9 +26,9 @@ const SignUp = () => {
                             <input type="text" placeholder="Confirm Password" className="w-full input input-bordered h-10" />
                         </label>
 
-                        <GenderCheckbox/>
+                        <GenderCheckbox />
 
-                        <a href="#" className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block">
+                        <a to='/login' className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block">
                             Already have an account?
                         </a>
 
