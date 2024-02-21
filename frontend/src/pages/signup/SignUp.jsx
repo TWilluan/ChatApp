@@ -22,7 +22,7 @@ const SignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await signup(inputs)
+        await signup(inputs);
     }
 
     return (<>
@@ -76,7 +76,7 @@ const SignUp = () => {
                             Already have an account?
                         </Link>
 
-                        <button className="btn btn-block btn-sm mt-2">Login</button>
+                        <button className="btn btn-block btn-sm mt-2">Sign up</button>
                     </div>
                 </form>
             </div>
