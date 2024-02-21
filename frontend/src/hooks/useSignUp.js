@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import { useAuthContext } from "../context/AuthContext";
 
 const useSignUp = () => {
     const [loading, setLoading] = useState(false);
 
+    const { authUser, setAuthUser } = useAuthContext();
+
     const signup = async ({ fullName, username, password, confirmPassword, gender }) => {
         const success = handleInputErrors({
+            // check if inputs is put in correctly
             fullName,
             username,
             password,
@@ -16,6 +20,7 @@ const useSignUp = () => {
         setLoading(true);
         try {
             const res = await fetch("api/auth/signin", {
+                // fetch backend signin
                 method: "POST",
                 headers: { "Content-type": "application/json" },
                 body: JSON.stringify({
@@ -28,6 +33,14 @@ const useSignUp = () => {
             });
 
             const data = await res.json();
+
+            if (data.error) throw new Error(data.error);
+
+            // send user to local storage
+            localStorage.setItem("authUser", JSON.stringify(data));
+            // update context
+            setAuthUser(data);
+
             console.log(data);
         } catch (e) {
             toast.error(e.message);
