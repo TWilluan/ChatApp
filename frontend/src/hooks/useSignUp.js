@@ -16,6 +16,7 @@ const useSignUp = () => {
             confirmPassword,
             gender,
         });
+        if (!success) return;
 
         setLoading(true);
         try {
@@ -40,8 +41,6 @@ const useSignUp = () => {
             localStorage.setItem("authUser", JSON.stringify(data));
             // update context
             setAuthUser(data);
-
-            console.log(data);
         } catch (e) {
             toast.error(e.message);
         } finally {
@@ -66,6 +65,8 @@ const handleInputErrors = ({ fullName, username, password, confirmPassword, gend
         toast.error("Password must be longer than 6 charaters");
         return false;
     }
+
+    return true;
 };
 
 export default useSignUp;
