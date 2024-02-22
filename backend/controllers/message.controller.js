@@ -31,7 +31,7 @@ export const send = async (req, res) => {
         // Save to mongoDB
         await Promise.all([conversation.save(), newMessage.save()]);
 
-        res.status(201).json({ newMessage });
+        res.status(201).json({newMessage});
     } catch (e) {
         console.log(`Error in message controller: ${e}`);
         res.status(500).json({ error: `Interal server error` });
