@@ -31,7 +31,7 @@ export const send = async (req, res) => {
         // Save to mongoDB
         await Promise.all([conversation.save(), newMessage.save()]);
 
-        res.status(201).json({newMessage});
+        res.status(201).json(newMessage);
     } catch (e) {
         console.log(`Error in message controller: ${e}`);
         res.status(500).json({ error: `Interal server error` });
@@ -47,12 +47,15 @@ export const get = async (req, res) => {
             participants: { $all: [senderId, recieverId] },
         }).populate("messages");
 
-        if (!conversation)
-            res.status(200).json([]);
-        res.status(200).json(conversation.messages);
+        if (!conversation) {
+            return res.status(200).json([]);
+        }
 
+        const messages = conversation.messages || [];
+
+        res.status(200).json(messages);
     } catch (e) {
-        console.log(`Error in message controller: ${e}`);
+        console.log(`Error in message controller: ${e.message}`);
         res.status(500).json({ error: "Internal server error" });
     }
 };

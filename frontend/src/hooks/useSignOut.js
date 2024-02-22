@@ -19,7 +19,8 @@ const useLogOut = () => {
             localStorage.removeItem("authUser");
             setAuthUser(null);
         } catch (e) {
-            toast.error(e);
+            console.log(e.message)
+            toast.error(e.message);
         } finally {
             setLoading(true);
         }
