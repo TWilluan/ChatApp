@@ -51,7 +51,7 @@ export const get = async (req, res) => {
             return res.status(200).json([]);
         }
 
-        const messages = conversation.messages || [];
+        const messages = conversation.messages;
 
         res.status(200).json(messages);
     } catch (e) {
