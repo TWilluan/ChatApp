@@ -1,5 +1,6 @@
 import Conversation from "../models/convers.model.js";
 import Message from "../models/message.model.js";
+import { io, getRecieverSocketId } from "../socket/socket.js";
 
 export const send = async (req, res) => {
     try {
@@ -26,10 +27,15 @@ export const send = async (req, res) => {
 
         if (newMessage) conversation.messages.push(newMessage._id);
 
-        // Socketio -> make it realtime
-
         // Save to mongoDB
         await Promise.all([conversation.save(), newMessage.save()]);
+
+        // Socket implementation
+        const recieverSocketId = getRecieverSocketId(recieverId);
+        if (recieverSocketId) {
+            // send event to specific client
+            io.to(recieverSocketId).emit("newMessage", newMessage);
+        }
 
         res.status(201).json(newMessage);
     } catch (e) {
