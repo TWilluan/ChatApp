@@ -33,5 +33,5 @@ app.get("*", (req, res) => {
 // start listening
 server.listen(PORT, () => {
     connect();
-    console.log(`Server is running on: http://localhost:${PORT}/`);
+    console.log(`Server is running on port: ${PORT}`);
 });
