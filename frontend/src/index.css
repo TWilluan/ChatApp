@@ -4,7 +4,7 @@
 
 body {
     background: linear-gradient(rgba(206, 115, 115, 0.2), rgba(242, 81, 81, 0.2));
-    background-repeat: no-repeat;
+    background-repeat: no-repeat url("../public/IMG_0788.JPG");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
