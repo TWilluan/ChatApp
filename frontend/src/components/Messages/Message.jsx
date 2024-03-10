@@ -5,8 +5,8 @@ import { extractTime } from "../../util/extractTime";
 const Message = ({ message }) => {
     const { authUser } = useAuthContext();
     const { selectedConversation } = useConversation();
-
     const fromMe = message.senderId === authUser._id;
+
     const formattedTime = extractTime(message.createdAt);
 
     const chatClassName = fromMe ? "chat-end" : "chat-start";
@@ -14,7 +14,6 @@ const Message = ({ message }) => {
     const bubbleBgColor = fromMe ? "bg-blue-500" : "";
 
     const shakeClass = message.shouldShake ? "shake" : "";
-    console.log(shakeClass);
 
     return (
         <div className={`chat ${chatClassName}`}>
