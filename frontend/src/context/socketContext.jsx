@@ -1,5 +1,3 @@
-
-
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAuthContext } from "./AuthContext";
 import io from "socket.io-client"
@@ -18,7 +16,7 @@ export const SocketContextProvider = ({ children }) => {
 
     useEffect(() => {
         if (authUser) {
-            const socket = io("https://chatapp-rsld.onrender.com", {
+            const socket = io("http://localhost:5000/", {
                 query: {
                     userId: authUser._id,
                 }
@@ -32,8 +30,10 @@ export const SocketContextProvider = ({ children }) => {
 
             return () => socket.close();
         } else {
-            if (socketGlobal)
+            if (socketGlobal) {
                 socketGlobal.close();
+                setSocketGlobal(null);
+            }
         }
     }, [authUser])
 

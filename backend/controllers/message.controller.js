@@ -1,5 +1,6 @@
 import Conversation from "../models/convers.model.js";
 import Message from "../models/message.model.js";
+import { getReceiverSocketId, io } from "../socket/socket.js";
 
 export const send = async (req, res) => {
     try {
@@ -26,10 +27,12 @@ export const send = async (req, res) => {
 
         if (newMessage) conversation.messages.push(newMessage._id);
 
-        // Socketio -> make it realtime
-
         // Save to mongoDB
         await Promise.all([conversation.save(), newMessage.save()]);
+
+        // Socketio -> make it realtime
+        const recieverSocketId = getReceiverSocketId(recieverId);
+        if (recieverSocketId) io.to(recieverSocketId).emit("newMessage", newMessage);
 
         res.status(201).json(newMessage);
     } catch (e) {
@@ -47,15 +50,14 @@ export const get = async (req, res) => {
             participants: { $all: [senderId, recieverId] },
         }).populate("messages");
 
-        if (!conversation) {
-            return res.status(200).json([]);
-        }
+        if (!conversation) return res.status(200).json([]);
 
         const messages = conversation.messages;
 
         res.status(200).json(messages);
     } catch (e) {
         console.log(`Error in message controller: ${e.message}`);
+        console.log("here")
         res.status(500).json({ error: "Internal server error" });
     }
 };

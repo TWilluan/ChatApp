@@ -24,7 +24,7 @@ const Message = ({ message }) => {
             </div>
 
             <div className={`font-sans chat-bubble text-gray-100 ${bubbleBgColor} ${shakeClass} pb-2`}>{message.message}</div>
-            <div className='chat-footer opacity-50 text-xs flex gap-1 items-center'>{formattedTime}</div>
+            <div className='text-zinc-900 chat-footer opacity-70 text-xs flex gap-1 items-center'>{formattedTime}</div>
         </div>
     );
 };
