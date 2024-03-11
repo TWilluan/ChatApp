@@ -27,7 +27,7 @@ const SignUp = () => {
 
     return (<>
         <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
-            <div className="w-full p-6 rounded-lg bg-zinc-900 text-zinc-900
+            <div className="w-full p-6 rounded-lg bg-zinc-900
                             hover:shadow-2xl transition ease-out
                             bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-20">
                 
@@ -38,7 +38,6 @@ const SignUp = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="">
                         <label className="label p-2">
-                            {/* <span className="text-zinc-900 text-base label-text">Full Name</span>{" "} */}
                             <input type="text"
                                 placeholder="Full Name"
                                 className="w-full input input-bordered h-10"
@@ -72,7 +71,7 @@ const SignUp = () => {
 
                         <GenderCheckbox onCheckBoxChange={handleCheckBox} selectedGender={inputs.gender} />
 
-                        <Link to='/login' className="font-sans text-base hover:underline hover:text-sky-600 mt-2 inline-block">
+                        <Link to='/login' className="text-zinc-900 font-sans text-base hover:underline hover:text-sky-600 mt-2 inline-block">
                             Already have an account?
                         </Link>
 

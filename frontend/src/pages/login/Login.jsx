@@ -16,40 +16,42 @@ const Login = () => {
 
     return (<>
         <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
-            <div className="h-full w-full bg-blue-600 rounded-md bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-30 border border-gray-100">
-                <h1 className="text-3x1 font-semibold text-center text-gray-300">Login
-                    <span className="text-blue-500"> ChatApp</span>
+            <div className="w-full h-full p-6 rounded-lg bg-zinc-900
+                            hover:shadow-2xl transition ease-out
+                            bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-20">
+                
+                <h1 className="text-4xl font-semibold text-center text-zinc-900 mb-5">Login
+                    <span className="text-sky-600"> ChatApp</span>
                 </h1>
 
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label className="label p-2">
-                            <span className="text-base label-text">UserName</span>
-                        </label>
+                        
                         <input type="text"
                             placeholder="Enter username"
                             className="w-full input input-bordered h-10"
                             value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        ></input>
+                            onChange={(e) => setUsername(e.target.value)}></input>
+                        </label>
                     </div>
 
                     <div>
                         <label className="label p-2">
-                            <span className="text-base label-text">Password</span>
-                        </label>
+
                         <input type="password"
                             placeholder="Enter password"
                             className="w-full input input-bordered h-10"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}></input>
+                        </label>
                     </div>
 
-                    <Link to={'/signup'} className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block">
+                    <Link to={'/signup'} className="fonts-sans text-zinc-900 text-base hover:underline hover:text-sky-600 mt-2 inline-block">
                         Don't have an account?
                     </Link>
 
-                    <button className="btn btn-block btn-sm mt-2"
+                    <button className="btn btn-block btn-sm mt-2 test-base"
                         disabled={loading}>
                         {loading ? <span className="loading loading-spinner "></span> : "Log in"}
                     </button>
