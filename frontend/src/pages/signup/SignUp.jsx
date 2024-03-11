@@ -27,15 +27,18 @@ const SignUp = () => {
 
     return (<>
         <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
-            <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
-                <h1 className="text-3x1 font-semibold text-center text-gray-300">
-                    SignUp <span className="text-blue-500">ChatApp</span>
+            <div className="w-full p-6 rounded-lg bg-zinc-900 text-zinc-900
+                            hover:shadow-2xl transition ease-out
+                            bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-20">
+                
+                <h1 className="text-4xl font-semibold text-center text-zinc-900 mb-5">
+                    SignUp <span className="text-sky-600">ChatApp</span>
                 </h1>
 
                 <form onSubmit={handleSubmit}>
-                    <div>
+                    <div className="">
                         <label className="label p-2">
-                            <span className="text-base label-text">Full Name</span>
+                            {/* <span className="text-zinc-900 text-base label-text">Full Name</span>{" "} */}
                             <input type="text"
                                 placeholder="Full Name"
                                 className="w-full input input-bordered h-10"
@@ -44,7 +47,6 @@ const SignUp = () => {
                         </label>
 
                         <label className="label p-2">
-                            <span className="text-base label-text">Username</span>
                             <input type="text"
                                 placeholder="Username"
                                 className="w-full input input-bordered h-10"
@@ -53,7 +55,6 @@ const SignUp = () => {
                         </label>
 
                         <label className="label p-2">
-                            <span className="text-base label-text">Password</span>
                             <input type="password"
                                 placeholder="Password"
                                 className="w-full input input-bordered h-10"
@@ -62,7 +63,6 @@ const SignUp = () => {
                         </label>
 
                         <label className="label p-2">
-                            <span className="text-base label-text">Confirm Password</span>
                             <input type="password"
                                 placeholder="Confirm Password"
                                 className="w-full input input-bordered h-10"
@@ -72,11 +72,11 @@ const SignUp = () => {
 
                         <GenderCheckbox onCheckBoxChange={handleCheckBox} selectedGender={inputs.gender} />
 
-                        <Link to='/login' className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block">
+                        <Link to='/login' className="font-sans text-base hover:underline hover:text-sky-600 mt-2 inline-block">
                             Already have an account?
                         </Link>
 
-                        <button className="btn btn-block btn-sm mt-2"
+                        <button className="btn btn-block btn-sm mt-2 text-base"
                             disabled={loading}>
                                 {loading ? <span className="loading loading-spinner"></span> : "Sign up"}
                         </button>
