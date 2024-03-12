@@ -2,9 +2,13 @@
 
 ## Introduction
 
-ChatApp is a web-based application designed to facilitate real-time communication
-between users. It provides a platform where users can join chat rooms, exchange messages,
-and engage in conversations with other users.
+Welcome to ChatApp documentation ChatApp is a web-based application using MERN
+stack designed to facilitate real-time communication between users. It provides 
+a platform where users can join chat rooms, exchange messages, and engage in 
+conversations with other users.
+
+To try the web, please click the link [below](#base-url). There might be the
+delay issue due to the deployment platform.
 
 ---
 
