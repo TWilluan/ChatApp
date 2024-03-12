@@ -21,16 +21,24 @@ and engage in conversations with other users.
 
 
 # Getting Started
-
 ## Base URL
 [https://chatapp-rsld.onrender.com/](https://chatapp-rsld.onrender.com/)
 ## Demo
-Login Page
+**Login Page**
+
 ![image](./demo/login.png)
-Signup Page
+
+**Signup Page**
+
 ![image](./demo/signup.png)
-Home Page
+
+**Home Page**
 ![image](./demo/home.png)
+
+## Accounts
+1. **account:** tuanvo  **password:** 123456
+2. **account:** guest   **password:** 123456
+
 
 ## Technologies
 1. **bcryptjs** -> hashing password before storing to database
@@ -43,11 +51,10 @@ Home Page
 8. **socket\.io** -> real-time, bidirectional communication between web clients and servers.
 9. **socket\.io-client** 
 
-To install:
+**To install:**
 ```js
 npm install bcryptjs cookie-parser cors dotenv express jsonwebtoken mongoose socket.io socket.io-client
 ```
-
 
 # Set up ENV file
 ```js
